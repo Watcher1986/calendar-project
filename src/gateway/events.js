@@ -1,35 +1,32 @@
 const baseUrl = 'https://614785ed65467e0017384b96.mockapi.io/api/v1/events';
 
-export const createEvent = eventData => {
-  return fetch(baseUrl, {
+export const createEvent = async eventData => {
+  const response = await fetch(baseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(eventData),
-  }).then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to create event');
-    }
   });
+  if (!response.ok) {
+    throw new Error('Failed to create event');
+  }
 };
 
-export const fetchEventsList = () => {
-  return fetch(baseUrl).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-  });
+export const fetchEventsList = async () => {
+  const res = await fetch(baseUrl);
+  if (res.ok) {
+    return res.json();
+  }
 };
 
-export const deleteEvent = eventId => {
-  return fetch(`${baseUrl}/${eventId}`, {
+export const deleteEvent = async eventId => {
+  const response = await fetch(`${baseUrl}/${eventId}`, {
     method: 'DELETE',
-  }).then(response => {
-    if (!response.ok) {
-      throw new Error('Failed to delete event');
-    }
   });
+  if (!response.ok) {
+    throw new Error('Failed to delete event');
+  }
 };
 
 // export const events = [
