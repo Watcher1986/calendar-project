@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
+
 import Day from '../day/Day';
 import Modal from '../modal/Modal';
 
@@ -11,8 +13,6 @@ const Week = ({ weekDates, events, isOnCreateBtn, onCloseEvent, onCreateEvent, o
       {weekDates.map(dayStart => {
         const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
-        //getting all events from the day we will render
-        // debugger;
         const dayEvents = events.filter(
           event => new Date(event.dateFrom) > dayStart && new Date(event.dateTo) < dayEnd,
         );
@@ -31,3 +31,12 @@ const Week = ({ weekDates, events, isOnCreateBtn, onCloseEvent, onCreateEvent, o
 };
 
 export default Week;
+
+Week.propTypes = {
+  weekDates: PropTypes.array.isRequired,
+  events: PropTypes.array.isRequired,
+  isOnCreateBtn: PropTypes.bool.isRequired,
+  onCloseEvent: PropTypes.func,
+  onCreateEvent: PropTypes.func,
+  onDeleteEvent: PropTypes.func
+}

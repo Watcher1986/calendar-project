@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types'
+
 import Hour from '../hour/Hour';
 
 import './day.scss';
@@ -30,9 +32,8 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent }) => {
     <div className="calendar__day" data-day={dataDay}>
       {currentTime.getDate() === dataDay && redLine}
       {hours.map(hour => {
-        //getting all events from the day we will render
-        const hourEvents = dayEvents.filter((event, index) => {
-          return new Date(event.dateFrom).getHours() === hour; // && new Date(event.dateFrom) > new Date(event[index + 1].dateFrom) && new Date(event.dateTo) > new Date(event[index + 1].dateTo)
+        const hourEvents = dayEvents.filter((event) => {
+          return new Date(event.dateFrom).getHours() === hour; 
         });
 
         return (
@@ -49,3 +50,9 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent }) => {
 };
 
 export default Day;
+
+Day.propTypes = {
+  dataDay: PropTypes.number.isRequired,
+  dayEvents: PropTypes.array.isRequired,
+  onDeleteEvent: PropTypes.func
+}

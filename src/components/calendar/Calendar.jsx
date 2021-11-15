@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'
 
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
@@ -52,3 +53,9 @@ const Calendar = ({ weekDates, onCloseEvent, isOnCreateBtn }) => {
 };
 
 export default Calendar;
+
+Calendar.propTypes = {
+  weekDates: PropTypes.array,
+  onCloseEvent: PropTypes.func,
+  isOnCreateBtn: PropTypes.bool
+}

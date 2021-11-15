@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types'
 
 import './modal.scss';
 
@@ -93,3 +94,8 @@ const Modal = ({ onCloseEvent, onCreateEvent }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  onCreateEvent: PropTypes.func.isRequired,
+  onCloseEvent: PropTypes.func.isRequired
+}
