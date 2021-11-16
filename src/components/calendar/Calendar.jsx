@@ -8,13 +8,12 @@ import { fetchEventsList, createEvent, deleteEvent } from '../../gateway/events'
 
 import './calendar.scss';
 
-const Calendar = ({ weekDates, onCloseEvent, isOnCreateBtn }) => {
+const Calendar = ({ weekDates, onCloseEvent, isModalActive }) => {
   const [events, setEvents] = useState([]);
-  const [isToggleForRender, setIsToggle] = useState(false);
 
   useEffect(() => {
     fetchEvents();
-  }, [isToggleForRender]);
+  }, []);
 
   const fetchEvents = () => {
     fetchEventsList().then(eventData => {
@@ -24,12 +23,10 @@ const Calendar = ({ weekDates, onCloseEvent, isOnCreateBtn }) => {
 
   const onCreateEvent = eventData => {
     createEvent(eventData).then(() => fetchEvents());
-    setIsToggle(!isToggleForRender);
   };
 
   const onDeleteEvent = eventId => {
     deleteEvent(eventId).then(() => fetchEvents());
-    setIsToggle(!isToggleForRender);
   };
 
   return (
@@ -42,7 +39,7 @@ const Calendar = ({ weekDates, onCloseEvent, isOnCreateBtn }) => {
             weekDates={weekDates}
             events={events}
             onCloseEvent={onCloseEvent}
-            isOnCreateBtn={isOnCreateBtn}
+            isModalActive={isModalActive}
             onCreateEvent={onCreateEvent}
             onDeleteEvent={onDeleteEvent}
           />
@@ -57,5 +54,5 @@ export default Calendar;
 Calendar.propTypes = {
   weekDates: PropTypes.array,
   onCloseEvent: PropTypes.func,
-  isOnCreateBtn: PropTypes.bool
+  isModalActive: PropTypes.bool
 }

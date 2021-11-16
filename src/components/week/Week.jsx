@@ -6,10 +6,10 @@ import Modal from '../modal/Modal';
 
 import './week.scss';
 
-const Week = ({ weekDates, events, isOnCreateBtn, onCloseEvent, onCreateEvent, onDeleteEvent }) => {
+const Week = ({ weekDates, events, isModalActive, onCloseEvent, onCreateEvent, onDeleteEvent }) => {
   return (
     <div className="calendar__week">
-      {isOnCreateBtn && <Modal onCloseEvent={onCloseEvent} onCreateEvent={onCreateEvent} />}
+      {isModalActive && <Modal events={events} onCloseEvent={onCloseEvent} onCreateEvent={onCreateEvent} />}
       {weekDates.map(dayStart => {
         const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
@@ -34,8 +34,8 @@ export default Week;
 
 Week.propTypes = {
   weekDates: PropTypes.array.isRequired,
-  events: PropTypes.array.isRequired,
-  isOnCreateBtn: PropTypes.bool.isRequired,
+  events: PropTypes.array,
+  isModalActive: PropTypes.bool.isRequired,
   onCloseEvent: PropTypes.func,
   onCreateEvent: PropTypes.func,
   onDeleteEvent: PropTypes.func

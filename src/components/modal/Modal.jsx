@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import './modal.scss';
+
+const DEVIDEEVENTMINUTESBY = 15;
 
 const Modal = ({ onCloseEvent, onCreateEvent }) => {
   const [event, setEvent] = useState({
@@ -33,7 +35,16 @@ const Modal = ({ onCloseEvent, onCreateEvent }) => {
       ),
       dateTo: moment(new Date(`${event.date},${event.endTime}`)).format('ddd MMM DD YYYY HH:mm:ss'),
     };
-    onCreateEvent(newEvent);
+
+    const startEventArr = event.startTime.split(':');
+    const endEventArr = event.endTime.split(':');
+    const minutesFromEvent = Number(startEventArr[1]) + Number(endEventArr[1]);
+
+    if (minutesFromEvent % DEVIDEEVENTMINUTESBY === 0) {
+      onCreateEvent(newEvent);
+      onCloseEvent();
+    }
+    onCloseEvent();
   };
 
   return (
@@ -97,5 +108,5 @@ export default Modal;
 
 Modal.propTypes = {
   onCreateEvent: PropTypes.func.isRequired,
-  onCloseEvent: PropTypes.func.isRequired
-}
+  onCloseEvent: PropTypes.func.isRequired,
+};

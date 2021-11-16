@@ -8,14 +8,14 @@ import './common.scss';
 
 const App = () => {
   const [weekStartDate, setWeekStartDate] = useState(new Date());
-  const [isOnCreateBtn, setIsOnCreateBtn] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false);
 
   const onCreateEvent = () => {
-    setIsOnCreateBtn(true);
+    setIsModalActive(!isModalActive);
   };
 
   const onCloseEvent = () => {
-    setIsOnCreateBtn(false);
+    setIsModalActive(!isModalActive);
   };
 
 
@@ -47,7 +47,7 @@ const App = () => {
       <Calendar 
         weekDates={weekDates} 
         onCloseEvent={onCloseEvent} 
-        isOnCreateBtn={isOnCreateBtn} 
+        isModalActive={isModalActive} 
       />
     </>
   );
