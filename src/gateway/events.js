@@ -24,8 +24,8 @@ export const deleteEvent = async eventId => {
   const response = await fetch(`${baseUrl}/${eventId}`, {
     method: 'DELETE',
   });
+  
   if (!response.ok) {
     throw new Error('Failed to delete event');
   }
 };
-
